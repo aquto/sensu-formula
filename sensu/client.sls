@@ -113,6 +113,8 @@ install_{{ gem_name }}:
     {% endif %}
     - rdoc: False
     - ri: False
+    - proxy: {{ salt['pillar.get']('sensu:client:gem_proxy', None) }}
+    - source: {{ salt['pillar.get']('sensu:client:gem_source', None) }}
 {% endfor %}
 
 {%- if salt['pillar.get']('sensu:checks') %}

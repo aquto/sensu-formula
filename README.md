@@ -51,6 +51,29 @@ Backward incompatible changes
 
 Adds the Sensu repository, and installs the Sensu package.
 
+Allows the configuration of alternative repositories (i.e. mirrors) using the following syntax:
+```
+## for ubuntu
+sensu:
+  lookup:
+    repos:
+      name: deb http://mysensumirror.org/apt/sensu sensu main
+      key_url: http://mysensumirror.org/apt/sensu/key.gpg
+
+## or for RedHat
+sensu:
+  lookup:
+    repos:
+      baseurl: http://mysensumirror.org/yum/el/$releasever/$basearch/
+
+## or if you don't want the formula to handle the repo for you...
+sensu:
+  lookup:
+    repos:
+      enabled: False
+```
+
+
 ``sensu.server``
 ------------
 
@@ -96,12 +119,15 @@ Configures sensu-client and starts the service.
 
 Check scripts can be deployed to all clients by placing them into ./sensu/files/plugins.
 
-You can use the embedded ruby or installing nagios plugins by setting:
+You can use the embedded ruby, set a proxy or mirror for installing gems, or install nagios plugins by setting:
 ```
 sensu:
   client:
     embedded_ruby: true
     nagios_plugins: true
+    gem_source: http://gemmirror.example.com:9292
+    # or
+    gem_proxy: http://squid.example.com:3128
 ```
 
 To subscribe your clients to the appropriate checks, you can update the `sensu` pillar with the required subscriptions.  You can also override the client address to another interface or change the name of the client.  In addition, you can also enable Sensu's safe mode (highly recommended, off by default).

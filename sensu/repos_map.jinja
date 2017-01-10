@@ -1,0 +1,15 @@
+{% set repos = salt['grains.filter_by']({
+    'Debian': {
+        'enabled': True,
+        'name': 'deb http://repositories.sensuapp.org/apt sensu main',
+        'key_url': 'http://repositories.sensuapp.org/apt/pubkey.gpg',
+    },
+    'RedHat': {
+        'enabled': True,
+        'baseurl': 'http://repositories.sensuapp.org/yum/el/$releasever/$basearch/',
+        'gpgcheck': '0',
+    },
+    'Windows': {
+        'enabled': False,
+    }
+}, merge=salt['pillar.get']('sensu:lookup:repos'), default='Debian') %}

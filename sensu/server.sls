@@ -37,7 +37,7 @@ sensu_handlers_file:
       - pkg: sensu
     - watch_in:
       - service: sensu-server
-   
+
 /etc/sensu/mutators:
   file.recurse:
     - source: salt://{{ sensu.paths.mutators }}
@@ -78,6 +78,8 @@ install_{{ gem_name }}:
     {% endif %}
     - rdoc: False
     - ri: False
+    - proxy: {{ salt['pillar.get']('sensu:client:gem_proxy', None) }}
+    - source: {{ salt['pillar.get']('sensu:client:gem_source', None) }}
 {% endfor %}
 
 sensu-server:
