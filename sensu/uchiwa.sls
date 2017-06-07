@@ -5,8 +5,7 @@ include:
 
 uchiwa:
   pkg.installed:
-    - require:
-      - pkgrepo: sensu
+    - name: uchiwa
   file.serialize:
     - name: /etc/sensu/uchiwa.json
     - formatter: json
