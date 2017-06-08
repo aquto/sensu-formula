@@ -6,7 +6,5 @@
     - mode: 644
     - require:
       - pkg: sensu
-    - dataset:
-        api:
-          {{ sensu.api }}
+    - dataset_pillar: sensu:api
 
