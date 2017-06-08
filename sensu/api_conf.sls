@@ -1,6 +1,3 @@
-include:
-  - sensu
-
 /etc/sensu/conf.d/api.json:
   file.serialize:
     - formatter: json
