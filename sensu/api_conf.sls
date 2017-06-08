@@ -1,5 +1,3 @@
-{% from "sensu/pillar_map.jinja" import sensu with context -%}
-
 include:
   - sensu
 
